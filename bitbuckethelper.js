@@ -2,11 +2,11 @@
 
 const request = require('./request');
 const comandos = require('commander');
-const inquirer = require('inquirer');
+const { prompt } = require('inquirer');
 
 comandos
   .version('1.0.0')
-  .description('Buscar repositorios do Github');
+  .description('Buscar repositorios do Bitbucket');
 
 const questoes = [
   {
@@ -48,10 +48,10 @@ const questoes = [
 comandos
   .command('repositorios')
   .alias('u')
-  .description('Buscar usuários pelo nome')
+  .description('Buscar repositórios de um usuário')
   .action(async () => {
 
-    let respostas = await inquirer.prompt(questoes);
+    let respostas = await prompt(questoes);
 
     let repos = await request.buscarRepositorios(respostas);
 
@@ -60,25 +60,3 @@ comandos
   });
 
 comandos.parse(process.argv);
-
-/*
-inquirer.prompt(questoes).then((respostas) => {
-      try {
-        let repos = await request.buscarRepositorios({
-          password: respostas.username,
-          username: respostas.password
-        });
-
-        console.info(repos);
-
-        // repos.map((repo) => {
-        //   console.info(repo.name);
-        // });
-
-      } catch (error) {
-        console.error(error);
-      }
-    })
-
-
-*/

@@ -21,13 +21,13 @@ async function buscarRepositorios(respostas) {
     if(respostas.somenteNome)
     {
         let repoName = [];
-        repositories.map((repo) => {
+        repositories.values.map((repo) => {
             repoName.push(repo['full_name'])
         });
         return repoName;
     }
 
-    return repositories;
+    return repositories.values;
 }
 
 async function buscarToken(username, password) {
@@ -41,8 +41,8 @@ async function buscarToken(username, password) {
             'grant_type': 'password',
             'username': username,
             'password': password,
-            'client_id': '---', //seu client-id aqui
-            'client_secret': '---' //seu secret aqui
+            'client_id': 'your client id',
+            'client_secret': 'your client secret'
         },
         json: true
     };
